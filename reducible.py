@@ -56,7 +56,7 @@ def hash_word(s, size):
     return hash_idx
 
 
-# TODO: Modify this function. You may delete this comment when you are done.
+
 def step_size(s):
     """
     Calculates step size for double hashing using STEP_SIZE_CONSTANT.
@@ -67,7 +67,7 @@ def step_size(s):
     return STEP_SIZE_CONSTANT - (hash_word(s,STEP_SIZE_CONSTANT))
 
 
-# TODO: Modify this function. You may delete this comment when you are done.
+
 def insert_word(s, hash_table):
     """
     Inserts a string into the hash table using double hashing for collision resolution.
@@ -83,11 +83,11 @@ def insert_word(s, hash_table):
 
     while hash_table[i] != "":
         i = (s_p + i) % s_z
-    hash_table[i] = s    
+    hash_table[i] = s
 
 
 
-# TODO: Modify this function. You may delete this comment when you are done.
+
 def find_word(s, hash_table):
     """
     Searches for a string in the hash table.
@@ -99,19 +99,17 @@ def find_word(s, hash_table):
     """
     s_p = step_size(s)
     s_z = len(hash_table)
-    i = hash_table(s, s_z)
+    i = hash_word(s, s_z)
 
     while hash_table[i] != "":
         if hash_table[i] == s:
             return True
-        elif hash_table[i] != s:
-            return False
         i = (s_p + i) % s_z
-    return False    
+    return False
 
 
 
-# TODO: Modify this function. You may delete this comment when you are done.
+
 def is_reducible(s, hash_table, hash_memo):
     """
     Determines if a string is reducible using a recursive check.
@@ -126,14 +124,13 @@ def is_reducible(s, hash_table, hash_memo):
         return True
     if find_word(s, hash_memo):
         return True
-    
     for i in range(len(s)):
         s_w = s[:i] + s[i+1:]
         if find_word(s_w, hash_table) and is_reducible(s_w, hash_table, hash_memo):
             insert_word(s, hash_memo)
             return True
         return False
-# TODO: Modify this function. You may delete this comment when you are done.
+
 def get_longest_words(string_list):
     """
     Finds longest words from a list.
@@ -142,11 +139,13 @@ def get_longest_words(string_list):
     post: Returns a list of words in string_list that have the maximum length.
     """
     for i in string_list:
-        m = max(len(i))
-        return sorted([i for i in string_list if len(i) == m])
+        l_t = []
+        if i in l_t:
+            return l_t[i]
+        return sorted([i for i in string_list if len(i) == l_t])
 
 
-# TODO: Modify this function. You may delete this comment when you are done.
+
 def main():
     """The main function that calculates the longest reducible words"""
     # create an empty word_list
@@ -190,18 +189,18 @@ def main():
     # print the reducible words in alphabetical order
     # one word per line
     w = input().split()
-    p_N = (len(w) * 2) + 1
-    while not is_prime(p_N):
-        p_N += 1
-    h = ["" for i in range(p_N)]
+    p_n = (len(w) * 2) + 1
+    while not is_prime(p_n):
+        p_n += 1
+    h = ["" for i in range(p_n)]
     for j in w:
         insert_word(j, h)
     s_m = int(len(w) * 0.2)
     while not is_prime(s_m):
         s_m += 1
     h_m = ["" for i in range (s_m)]
-    r = [j for j in w is is_reducible(j, h, h_m)] 
-    l = get_longest_words(r)      
+    r = [j for j in w is is_reducible(j, h, h_m)]
+    l = get_longest_words(r)
     for j in l:
         print(j)
 
