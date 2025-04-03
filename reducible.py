@@ -79,7 +79,7 @@ def insert_word(s, hash_table):
     """
     s_p = step_size(s)
     s_z = len(hash_table)
-    i = hash_word(s, size)
+    i = hash_word(s, s_z)
 
     while hash_table[i] != "":
         i = (s_p + i) % s_z
