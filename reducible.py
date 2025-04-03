@@ -64,7 +64,7 @@ def step_size(s):
     pre: s is a lowercase string.
     post: Returns the calculated step size as an integer based on the provided string.
     """
-    return STEP_SIZE_CONSTANT - (hash_word(STEP_SIZE_CONSTANT, s))
+    return STEP_SIZE_CONSTANT - (hash_word(s,STEP_SIZE_CONSTANT))
 
 
 # TODO: Modify this function. You may delete this comment when you are done.
@@ -124,7 +124,7 @@ def is_reducible(s, hash_table, hash_memo):
     """
     if s in {'a', 'i', 'o'}:
         return True
-    if find_word(hash_memo, s):
+    if find_word(s, hash_memo):
         return True
     
     for i in range(len(s)):
@@ -190,7 +190,7 @@ def main():
     # print the reducible words in alphabetical order
     # one word per line
     w = input().split()
-    p_N = (len(w) + 1) * 2
+    p_N = (len(w) * 2) + 1
     while not is_prime(p_N):
         p_N += 1
     h = ["" for i in range(p_N)]
