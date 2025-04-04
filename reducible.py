@@ -129,7 +129,7 @@ def is_reducible(s, hash_table, hash_memo):
         if find_word(s_w, hash_table) and is_reducible(s_w, hash_table, hash_memo):
             insert_word(s, hash_memo)
             return True
-        return False
+    return False
 
 def get_longest_words(string_list):
     """
@@ -138,11 +138,16 @@ def get_longest_words(string_list):
     pre: string_list is a list of lowercase strings.
     post: Returns a list of words in string_list that have the maximum length.
     """
+    m = 0
+    l_t = []
     for i in string_list:
-        l_t = []
-        if i in l_t:
-            return l_t[i]
-        return sorted([i for i in string_list if len(i) == l_t])
+        if len(i) > m:
+            l_t = []
+            m = len(i)
+            l_t.append(i)
+        elif m == len(i):
+            l_t.append(i)
+    return l_t
 
 
 
@@ -189,17 +194,17 @@ def main():
     # print the reducible words in alphabetical order
     # one word per line
     w = input().split()
-    p_n = (len(w) * 2) + 1
-    while not is_prime(p_n):
-        p_n += 1
-    h = ["" for i in range(p_n)]
+    p = (len(w) * 2) + 1
+    while not is_prime(p):
+        p += 1
+    x = ["" for i in range(p)]
     for j in w:
-        insert_word(j, h)
+        insert_word(j, x)
     s_m = int(len(w) * 0.2)
     while not is_prime(s_m):
         s_m += 1
     h_m = ["" for i in range (s_m)]
-    r = [j for j in w is is_reducible(j, h, h_m)]
+    r = [j for j in w is is_reducible(j, x, h_m)]
     l = get_longest_words(r)
     for j in l:
         print(j)
