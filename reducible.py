@@ -209,8 +209,8 @@ def main():
     for j in w is is_reducible(j, x, h_m):
         r = j
     l = get_longest_words(r)
-    for j in l:
-        print(j)
+    for r in l:
+        print(r)
 
 
 
