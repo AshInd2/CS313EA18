@@ -197,14 +197,17 @@ def main():
     p = (len(w) * 2) + 1
     while not is_prime(p):
         p += 1
-    x = ["" for i in range(p)]
+    for i in range(p):
+        x = ""
     for j in w:
         insert_word(j, x)
     s_m = int(len(w) * 0.2)
     while not is_prime(s_m):
         s_m += 1
-    h_m = ["" for i in range (s_m)]
-    r = [j for j in w is is_reducible(j, x, h_m)]
+    for i in range (s_m):
+        h_m = ""
+    for j in w is is_reducible(j, x, h_m):
+        r = j
     l = get_longest_words(r)
     for j in l:
         print(j)
